@@ -1,0 +1,70 @@
+```plantuml
+@startuml
+skinparam packageStyle rectangle
+skinparam monochrome true
+skinparam shadowing false
+
+title Diagrama de Casos de Uso - Sistema de Gestão de Cursos e Anotações
+
+actor "Aluno" as Student
+actor "Administrador" as Admin
+
+rectangle "Sistema de Gestão de Cursos e Anotações" {
+  ' Casos de uso de autenticação
+  usecase "Registrar-se" as UC1
+  usecase "Fazer Login" as UC2
+  usecase "Gerenciar Perfil" as UC3
+  usecase "Fazer Logout" as UC4
+  
+  ' Casos de uso de cursos (aluno)
+  usecase "Visualizar Cursos Disponíveis" as UC5
+  usecase "Ver Detalhes do Curso" as UC6
+  usecase "Matricular-se em Curso" as UC7
+  usecase "Visualizar Cursos Matriculados" as UC8
+  
+  ' Casos de uso de anotações
+  usecase "Criar Anotação" as UC9
+  usecase "Editar Anotação" as UC10
+  usecase "Excluir Anotação" as UC11
+  usecase "Visualizar Anotações" as UC12
+  usecase "Marcar Anotação como Favorita" as UC13
+  
+  ' Casos de uso de administração
+  usecase "Gerenciar Usuários" as UC14
+  usecase "Gerenciar Cursos" as UC15
+  usecase "Visualizar Estatísticas" as UC16
+}
+
+' Relacionamentos do Aluno
+Student --> UC1
+Student --> UC2
+Student --> UC3
+Student --> UC4
+Student --> UC5
+Student --> UC6
+Student --> UC7
+Student --> UC8
+Student --> UC9
+Student --> UC10
+Student --> UC11
+Student --> UC12
+Student --> UC13
+
+' Relacionamentos do Administrador
+Admin --> UC2
+Admin --> UC3
+Admin --> UC4
+Admin --> UC14
+Admin --> UC15
+Admin --> UC16
+Admin --> UC5
+Admin --> UC6
+
+' Inclusões e extensões
+UC7 ..> UC6 : <<include>>
+UC9 ..> UC8 : <<include>>
+UC10 ..> UC12 : <<include>>
+UC13 ..> UC12 : <<include>>
+
+@enduml
+```

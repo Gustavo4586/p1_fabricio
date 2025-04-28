@@ -1,0 +1,49 @@
+```plantuml
+@startuml
+skinparam packageStyle rectangle
+skinparam monochrome true
+skinparam shadowing false
+
+title Diagrama de Entidades - Banco de Dados Não-Relacional (MongoDB)
+
+' Coleção Note
+package "Note" as note {
+  class Note {
+    _id: ObjectId
+    title: String
+    content: String
+    courseId: Number
+    userId: Number
+    tags: Array<String>
+    favorite: Boolean
+    metadata: Object {
+      color: String
+      lessonNumber: Number
+      lessonTitle: String
+      createdAt: Date
+      updatedAt: Date
+    }
+  }
+}
+
+' Coleção NoteStat
+package "NoteStat" as noteStat {
+  class NoteStat {
+    _id: ObjectId
+    userId: Number
+    totalNotes: Number
+    favoriteCount: Number
+    notesByCourse: Array<Object> {
+      courseId: Number
+      courseName: String
+      count: Number
+      lastUpdated: Date
+    }
+    lastActivity: Date
+  }
+}
+
+note -- noteStat : Relacionamento \nlógico
+
+@enduml
+```

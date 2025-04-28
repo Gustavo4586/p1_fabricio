@@ -1,0 +1,62 @@
+```plantuml
+@startuml
+skinparam packageStyle rectangle
+skinparam monochrome true
+skinparam shadowing false
+
+title Diagrama de Entidade-Relacionamento - Banco de Dados Relacional
+
+' Entidades
+entity "User" as user {
+  *id : integer <<PK>>
+  --
+  *name : varchar(255)
+  *email : varchar(255) <<unique>>
+  *password : varchar(255)
+  *role : enum('admin', 'aluno')
+  *active : boolean
+  *createdAt : timestamp
+  *updatedAt : timestamp
+}
+
+entity "Category" as category {
+  *id : integer <<PK>>
+  --
+  *name : varchar(255)
+  description : text
+  *createdAt : timestamp
+  *updatedAt : timestamp
+}
+
+entity "Course" as course {
+  *id : integer <<PK>>
+  --
+  *title : varchar(255)
+  description : text
+  *duration : integer
+  *level : enum('iniciante', 'intermediário', 'avançado')
+  imageUrl : varchar(255)
+  *active : boolean
+  *categoryId : integer <<FK>>
+  *createdAt : timestamp
+  *updatedAt : timestamp
+}
+
+entity "Enrollment" as enrollment {
+  *id : integer <<PK>>
+  --
+  *userId : integer <<FK>>
+  *courseId : integer <<FK>>
+  *status : enum('ativo', 'concluído', 'cancelado')
+  progress : integer
+  *createdAt : timestamp
+  *updatedAt : timestamp
+}
+
+' Relacionamentos
+user ||--o{ enrollment
+course ||--o{ enrollment
+category ||--o{ course
+
+@enduml
+```
